@@ -5,7 +5,7 @@ import { Languages } from "lucide-react";
 
 const Sidebar = () => {
   return (
-    <div className="w-full max-w-[1400px] mx-auto flex items-center justify-between">
+    <div className="flex items-center justify-between">
       <Image src={"/img/logo.png"} alt="logo" width={150} height={150} />
       <nav
         className="flex items-center gap-4 text-gray-600 text-base

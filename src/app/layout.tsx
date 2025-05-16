@@ -20,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-white h-screen w-full">
-      <body className={`${poppins.className} antialiased`}>
+      <body
+        className={`${poppins.className} w-full max-w-[1400px] mx-auto  antialiased`}
+      >
         <Sidebar />
         {children}
       </body>
