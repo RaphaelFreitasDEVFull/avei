@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Sidebar from "./components/sidebar";
 
 export const metadata: Metadata = {
   title: "AVEI",
@@ -20,12 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-white h-screen w-full">
-      <body
-        className={`${poppins.className} w-full max-w-[1400px] mx-auto  antialiased`}
-      >
-        <Sidebar />
-        {children}
-      </body>
+      <body className={`${poppins.className}  antialiased`}>{children}</body>
     </html>
   );
 }

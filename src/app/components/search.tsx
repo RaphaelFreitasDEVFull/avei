@@ -6,7 +6,7 @@ const Search = () => {
   return (
     <div className=" flex gap-4 items-center w-full">
       <div className="flex flex-col gap-2">
-        <Label>Para onde ir?:</Label>
+        <Label>Para onde ir?</Label>
         <div className="relative">
           {" "}
           <Map className="absolute left-3 top-1/2 h-4 w-4 text-muted-foreground transform -translate-y-1/2 pointer-events-none" />
@@ -47,7 +47,7 @@ const Search = () => {
         </div>
       </div>
       <div className=" flex flex-col gap-2">
-        <Label>Orçamento: </Label>
+        <Label>Até quanto? </Label>
         <div className="relative">
           <Input
             placeholder="Orçamento"
