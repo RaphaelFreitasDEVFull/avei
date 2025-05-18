@@ -1,15 +1,6 @@
 import Image from "next/image";
 import Search from "./components/search";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import Sidebar from "./components/sidebar";
 
 const Home = () => {
