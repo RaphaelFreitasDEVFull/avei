@@ -8,8 +8,9 @@ import { FaFacebook, FaGoogle } from "react-icons/fa";
 
 const LoginPage = () => {
   return (
-    <div className="flex">
-      <div className="w-1/2 min-w-1/2 relative h-screen z-0">
+    <div className="flex flex-col lg:flex-row min-h-screen">
+      {/* Lado da imagem */}
+      <div className="relative w-full lg:w-1/2 lg:block hidden lg:h-auto">
         <Image
           src="/img/login-img.png"
           alt="hero bg"
@@ -17,53 +18,61 @@ const LoginPage = () => {
           className="object-cover"
         />
       </div>
-      <div className="w-1/2 flex items-center justify-center flex-col gap-2">
-        <Image src={"/img/logo.png"} alt="logo" width={200} height={200} />
-        <h2 className="text-2xl font-bold text-blue-900">Login</h2>
-        <h3 className="text-sm text-gray-500">
-          Bem-vindo de volta! Por favor, insira seus dados.
-        </h3>
-        <div className="w-full p-8 flex flex-col gap-3">
-          <div className="flex flex-col gap-2">
-            <Label>Email</Label>
-            <Input />
+
+      {/* Lado do formulário */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center px-6 py-10">
+        <div className="max-w-md w-full flex flex-col items-center gap-4">
+          <Image src="/img/logo.png" alt="logo" width={150} height={150} />
+          <h2 className="text-2xl font-bold text-blue-900">Login</h2>
+          <h3 className="text-sm text-gray-500 text-center">
+            Bem-vindo de volta! Por favor, insira seus dados.
+          </h3>
+
+          <div className="w-full flex flex-col gap-4">
+            <div className="flex flex-col gap-1">
+              <Label>Email</Label>
+              <Input type="email" placeholder="Digite seu email" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <Label>Senha</Label>
+              <Input type="password" placeholder="Digite sua senha" />
+            </div>
+
+            <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center gap-2">
+                <Checkbox id="remember" />
+                <Label htmlFor="remember">Lembre-se</Label>
+              </div>
+              <Link href="/" className="text-blue-600 font-medium">
+                Esqueceu sua senha?
+              </Link>
+            </div>
+
+            <Button size="lg" className="w-full">
+              Entrar
+            </Button>
           </div>
-          <div className="flex flex-col gap-2">
-            <Label>Senha</Label>
-            <Input />
+
+          {/* Redes sociais */}
+          <div className="flex gap-4 mt-4">
+            <button className="p-3 border border-gray-400 rounded-xl">
+              <FaFacebook className="w-5 h-5" />
+            </button>
+            <button className="p-3 border border-gray-400 rounded-xl">
+              <FaGoogle className="w-5 h-5" />
+            </button>
           </div>
-        </div>
-        <div className="flex items-center justify-between w-full px-8">
-          <div className="flex gap-2">
-            <Checkbox id="remember" />
-            <Label htmlFor="remember">Lembre-se</Label>
-          </div>
-          <Link href={"/"} className="font-semibold text-blue-600">
-            Esqueceu sua senha?
-          </Link>
-        </div>
-        <div className="w-full px-8 mt-4">
-          <Button size={"lg"} className="w-full cursor-pointer">
-            Entrar
-          </Button>
-        </div>
-        <div className="flex gap-3 mt-4">
-          <div className="p-4 border border-gray-500 rounded-2xl">
-            <FaFacebook className="w-6 h-6" />
-          </div>
-          <div className="p-4 border border-gray-500 rounded-2xl">
-            <FaGoogle className="w-6 h-6" />
-          </div>
-        </div>
-        <div>
-          <p className="text-sm text-gray-400">
+
+          {/* Cadastro */}
+          <p className="text-sm text-gray-500 text-center">
             Não tem uma conta?{" "}
-            <Link href={"#"} className="text-indigo-700">
+            <Link href="#" className="text-indigo-700 font-semibold">
               Crie sua conta agora.
             </Link>
           </p>
+
+          <p className="text-xs text-gray-400 text-center mt-4">&copy; AVEI</p>
         </div>
-        <p className="text-xs text-gray-400">&copy; AVEI</p>
       </div>
     </div>
   );
