@@ -2,6 +2,7 @@ import Image from "next/image";
 import Search from "./components/search";
 import { Button } from "@/components/ui/button";
 import Sidebar from "./components/sidebar";
+import Popularity from "./components/popularity";
 
 const Home = () => {
   return (
@@ -32,6 +33,7 @@ const Home = () => {
           />
         </div>
       </div>
+      <Popularity />
     </div>
   );
 };
