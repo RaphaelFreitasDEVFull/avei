@@ -10,7 +10,7 @@ const Sidebar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="w-full px-4 py-2 shadow-sm">
+    <header className="w-full px-4 py-2 ">
       <div className="flex items-center justify-between max-w-[1400px] mx-auto">
         {/* Logo */}
         <Image src="/img/logo.png" alt="logo" width={120} height={120} />
