@@ -1,0 +1,177 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  phoneNumber   String?
+  passwordHash  String
+  avatarUrl     String?
+  bio           String?
+  role          String    @default("guest")
+  emailVerified Boolean   @default(false)
+  lastLoginAt   DateTime?
+  isHost        Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now())
+  deletedAt     DateTime?
+
+  properties       Property[]
+  reservations     Reservation[]  @relation("GuestReservations")
+  sentMessages     Message[]      @relation("SentMessages")
+  receivedMessages Message[]      @relation("ReceivedMessages")
+  favorites        Favorite[]
+  reviews          Review[]
+  notifications    Notification[]
+}
+
+model Property {
+  id            String    @id @default(cuid())
+  hostId        String
+  title         String
+  description   String
+  pricePerNight Decimal
+  location      String
+  latitude      Decimal
+  longitude     Decimal
+  maxGuests     Int
+  numBedrooms   Int
+  numBathrooms  Int
+  propertyType  String
+  amenities     Json
+  rules         String
+  status        String    @default("active")
+  viewsCount    Int       @default(0)
+  available     Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now())
+  deletedAt     DateTime?
+
+  host         User                @relation(fields: [hostId], references: [id])
+  images       PropertyImage[]
+  reservations Reservation[]
+  favorites    Favorite[]
+  availability AvailabilityBlock[]
+}
+
+model PropertyImage {
+  id         String   @id @default(cuid())
+  propertyId String
+  imageUrl   String
+  position   Int      @default(0)
+  altText    String?
+  createdAt  DateTime @default(now())
+
+  property Property @relation(fields: [propertyId], references: [id])
+}
+
+model Reservation {
+  id                 String    @id @default(cuid())
+  propertyId         String
+  guestId            String
+  checkIn            DateTime
+  checkOut           DateTime
+  totalPrice         Decimal
+  status             String    @default("pending")
+  paymentStatus      String    @default("unpaid")
+  cancellationReason String?
+  cancellationDate   DateTime?
+  guestNotes         String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @default(now())
+  deletedAt          DateTime?
+
+  property Property @relation(fields: [propertyId], references: [id])
+  guest    User     @relation("GuestReservations", fields: [guestId], references: [id])
+  review   Review?
+  payment  Payment?
+}
+
+model Review {
+  id            String   @id @default(cuid())
+  reservationId String   @unique
+  reviewerId    String
+  rating        Int
+  comment       String?
+  anonymized    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  reservation Reservation @relation(fields: [reservationId], references: [id])
+  reviewer    User        @relation(fields: [reviewerId], references: [id])
+}
+
+model Message {
+  id         String    @id @default(cuid())
+  senderId   String
+  receiverId String
+  content    String
+  sentAt     DateTime  @default(now())
+  readAt     DateTime?
+
+  sender   User @relation("SentMessages", fields: [senderId], references: [id])
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id])
+}
+
+model Payment {
+  id            String    @id @default(cuid())
+  reservationId String    @unique
+  amount        Decimal
+  currency      String    @default("USD")
+  status        String    @default("pending")
+  paymentMethod String
+  transactionId String?
+  paidAt        DateTime?
+  createdAt     DateTime  @default(now())
+
+  reservation Reservation @relation(fields: [reservationId], references: [id])
+}
+
+model Favorite {
+  id         String   @id @default(cuid())
+  userId     String
+  propertyId String
+  createdAt  DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id])
+  property Property @relation(fields: [propertyId], references: [id])
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  type      String
+  content   String
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model AvailabilityBlock {
+  id         String   @id @default(cuid())
+  propertyId String
+  startDate  DateTime
+  endDate    DateTime
+  reason     String?
+  createdAt  DateTime @default(now())
+
+  property Property @relation(fields: [propertyId], references: [id])
+}
+
+model Coupon {
+  id            String   @id @default(cuid())
+  code          String   @unique
+  discountType  String
+  discountValue Decimal
+  validFrom     DateTime
+  validTo       DateTime
+  usageLimit    Int?
+  createdAt     DateTime @default(now())
+}
