@@ -3,11 +3,13 @@ import Search from "./components/search";
 import { Button } from "@/components/ui/button";
 import Sidebar from "./components/sidebar";
 import Popularity from "./components/popularity";
+import { hashSync } from "bcrypt-ts";
 
 const Home = () => {
   return (
     <div className="flex flex-col w-full max-w-[1400px] mx-auto px-4">
       <Sidebar />
+
       <div className="flex flex-col-reverse lg:flex-row w-full mt-12 gap-8">
         {/* Text Section */}
         <div className="w-full lg:w-1/2 mt-8 lg:mt-16 flex flex-col gap-10 lg:gap-16">
