@@ -1,10 +1,9 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authUser } from "@/app/actions/login";
-import type { User as PrismaUser } from "@prisma/client";
-
-// Extend NextAuth types to include custom fields
-import type { DefaultSession } from "next-auth";
+import Google from "next-auth/providers/google";
+import Facebook from "next-auth/providers/facebook";
+import db from "@/lib/db";
 
 declare module "next-auth" {
   interface Session {
@@ -81,7 +80,29 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         };
       },
     }),
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID! as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET! as string,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+    }),
+    Facebook({
+      clientId: process.env.FACEBOOK_CLIENT_ID! as string,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET! as string,
+      authorization: {
+        params: {
+          scope: "email,public_profile",
+          response_type: "code",
+        },
+      },
+    }),
   ],
+
   callbacks: {
     // O token JWT é gerado aqui (quando o usuário faz login)
     async jwt({ token, user, trigger }) {
@@ -156,6 +177,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   session: {
     strategy: "jwt", // usar JWT para sessão
+  },
+  events: {
+    async signIn({ user }) {
+      const existingUser = await db.user.findUnique({
+        where: { email: user.email as string },
+      });
+
+      if (!existingUser) {
+        await db.user.create({
+          data: {
+            email: user.email!,
+            name: user.name ?? "",
+            avatarUrl: user.image ?? "",
+            role: "guest", // Defina o papel padrão como 'guest'
+            isHost: false, // Defina isHost como false por padrão
+            passwordHash: "", // Senha não é necessária para login social
+          },
+        });
+      }
+    },
   },
   debug: process.env.NODE_ENV === "development",
 });

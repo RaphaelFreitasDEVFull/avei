@@ -1,12 +1,17 @@
 import LoginForm from "@/app/forms/LoginForm";
 import { auth } from "@/auth";
+
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 
 const LoginPage = async () => {
   const user = await auth();
-  console.log("User:", user);
+
+  if (user) {
+    redirect("/dashboard");
+  }
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
@@ -40,16 +45,6 @@ const LoginPage = async () => {
           </h3>
 
           <LoginForm />
-
-          {/* Redes sociais */}
-          <div className="flex gap-4 mt-4">
-            <button className="p-3 border border-gray-400 rounded-xl">
-              <FaFacebook className="w-5 h-5" />
-            </button>
-            <button className="p-3 border border-gray-400 rounded-xl">
-              <FaGoogle className="w-5 h-5" />
-            </button>
-          </div>
 
           {/* Cadastro */}
           <p className="text-sm text-gray-500 text-center">
