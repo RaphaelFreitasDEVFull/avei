@@ -4,7 +4,6 @@ import { auth } from "@/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
 
 const LoginPage = async () => {
   const user = await auth();

@@ -16,7 +16,6 @@ export const loginUser = async (_: unknown, formData: FormData) => {
       message: "Por favor, preencha todos os campos.",
     };
   }
-
   try {
     const result = await signIn("credentials", {
       email,

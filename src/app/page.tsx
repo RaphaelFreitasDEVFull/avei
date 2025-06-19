@@ -3,7 +3,6 @@ import Search from "./components/search";
 import { Button } from "@/components/ui/button";
 import Sidebar from "./components/sidebar";
 import Popularity from "./components/popularity";
-import { hashSync } from "bcrypt-ts";
 
 const Home = () => {
   return (
