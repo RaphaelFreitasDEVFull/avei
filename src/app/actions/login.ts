@@ -8,7 +8,7 @@ import { compareSync } from "bcrypt-ts";
 export const loginUser = async (_: unknown, formData: FormData) => {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-  const remember = formData.get("remember") === "on";
+  // const remember = formData.get("remember") === "on";
 
   if (!email || !password) {
     return {
