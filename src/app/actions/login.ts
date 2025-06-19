@@ -34,7 +34,7 @@ export const loginUser = async (_: unknown, formData: FormData) => {
     }
 
     return { success: true, message: "Login realizado com sucesso!" };
-  } catch (error: any) {
+  } catch (error: { success: boolean; message: string }) {
     console.error("Erro no login:", error);
     return {
       success: false,
