@@ -34,12 +34,12 @@ export const loginUser = async (_: unknown, formData: FormData) => {
     }
 
     return { success: true, message: "Login realizado com sucesso!" };
-  } catch (error: { success: boolean; message: string }) {
+  } catch (error: unknown) {
     console.error("Erro no login:", error);
     return {
       success: false,
       message:
-        error?.message === "Failed to fetch"
+        error instanceof Error && error.message === "Failed to fetch"
           ? "Não foi possível conectar ao servidor. Verifique sua internet."
           : "Ocorreu um erro inesperado. Tente novamente mais tarde.",
     };
