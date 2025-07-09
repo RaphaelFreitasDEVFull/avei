@@ -6,9 +6,6 @@ import MapWrapper from "./components/mapWrapper";
 
 const Dashboard = async () => {
   const user = await auth();
-  if (!user) {
-    redirect("/login");
-  }
 
   return (
     <div className="p-8 flex flex-col gap-8">
