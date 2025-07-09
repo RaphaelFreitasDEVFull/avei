@@ -1,6 +1,5 @@
 import { auth } from "@/auth";
 import { Bell, DollarSign, House } from "lucide-react";
-import { redirect } from "next/navigation";
 import "leaflet/dist/leaflet.css";
 import MapWrapper from "./components/mapWrapper";
 
