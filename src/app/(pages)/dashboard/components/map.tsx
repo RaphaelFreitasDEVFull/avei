@@ -3,6 +3,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useEffect, useState } from "react";
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 // Corrigir ícones
 delete (L.Icon.Default.prototype as unknown as { _getIconUrl?: () => string })
@@ -28,13 +29,15 @@ export default function MapPin() {
 
   return (
     <MapContainer
+      // @ts-ignore
       center={center}
       zoom={13}
-      style={{ height: 400, width: "100%" }}
+      style={{ height: "400px", width: "100%" }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='<a href="https://osm.org/copyright">OpenStreetMap</a>'
+        // @ts-ignore
+        attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       {properties.map(({ id, name, position }) => (
         <Marker key={id} position={position}>
