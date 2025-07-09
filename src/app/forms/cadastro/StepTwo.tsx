@@ -56,9 +56,11 @@ const StepTwoCadastro = ({ data, onChange }: Props) => {
     },
   });
 
-  const [countries, setCountries] = useState<unknown[]>([]);
-  const [states, setStates] = useState<unknown[]>([]);
-  const [cities, setCities] = useState<unknown[]>([]);
+  type Location = { id: string; name: string };
+
+  const [countries, setCountries] = useState<Location[]>([]);
+  const [states, setStates] = useState<Location[]>([]);
+  const [cities, setCities] = useState<Location[]>([]);
 
   const countryId = watch("countryId");
   const stateId = watch("stateId");
