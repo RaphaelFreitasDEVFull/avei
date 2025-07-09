@@ -50,10 +50,13 @@ export default function MultiStepForm() {
         throw new Error(errorData.error || "Erro ao cadastrar");
       }
 
-      const data = await res.json();
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.message || "Erro desconhecido");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Erro desconhecido");
+      } else {
+        setError("Erro desconhecido");
+      }
     } finally {
       setLoading(false);
     }

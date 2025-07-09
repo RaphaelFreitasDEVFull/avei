@@ -2,7 +2,6 @@ import { auth } from "@/auth";
 import { Bell, DollarSign, House } from "lucide-react";
 import { redirect } from "next/navigation";
 import "leaflet/dist/leaflet.css";
-import dynamic from "next/dynamic";
 import MapWrapper from "./components/mapWrapper";
 
 const Dashboard = async () => {

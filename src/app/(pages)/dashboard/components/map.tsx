@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 import L from "leaflet";
 
 // Corrigir ícones
-delete (L.Icon.Default.prototype as any)._getIconUrl;
+delete (L.Icon.Default.prototype as unknown as { _getIconUrl?: () => string })
+  ._getIconUrl;
+
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: "/leaflet/marker-icon-2x.png",
   iconUrl: "/leaflet/marker-icon.png",
