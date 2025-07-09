@@ -29,14 +29,14 @@ export default function MapPin() {
 
   return (
     <MapContainer
-      // @ts-ignore
+      // @ts-expect-error
       center={center}
       zoom={13}
       style={{ height: "400px", width: "100%" }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        // @ts-ignore
+        // @ts-expect-error
         attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       {properties.map(({ id, name, position }) => (
