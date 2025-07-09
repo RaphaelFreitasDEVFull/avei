@@ -41,7 +41,7 @@ export const loginUser = async (_: unknown, formData: FormData) => {
       message:
         error instanceof Error && error.message === "Failed to fetch"
           ? "Não foi possível conectar ao servidor. Verifique sua internet."
-          : "Ocorreu um erro inesperado. Tente novamente mais tarde.",
+          : "Credenciais incorretas, preencha o email e senha corretamente.",
     };
   }
 };

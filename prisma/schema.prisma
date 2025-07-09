@@ -22,6 +22,9 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @default(now())
   deletedAt     DateTime?
+  countryId     String?
+  stateId       String?
+  cityId        String?
 
   properties       Property[]
   reservations     Reservation[]  @relation("GuestReservations")
@@ -30,6 +33,27 @@ model User {
   favorites        Favorite[]
   reviews          Review[]
   notifications    Notification[]
+}
+
+model Country {
+  id     String  @id @default(cuid())
+  name   String  @unique
+  states State[]
+}
+
+model State {
+  id        String  @id @default(cuid())
+  name      String
+  country   Country @relation(fields: [countryId], references: [id])
+  countryId String
+  cities    City[]
+}
+
+model City {
+  id      String @id @default(cuid())
+  name    String
+  state   State  @relation(fields: [stateId], references: [id])
+  stateId String
 }
 
 model Property {

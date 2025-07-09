@@ -48,7 +48,7 @@ const LoginPage = async () => {
           {/* Cadastro */}
           <p className="text-sm text-gray-500 text-center">
             Não tem uma conta?{" "}
-            <Link href="#" className="text-indigo-700 font-semibold">
+            <Link href="/cadastro" className="text-indigo-700 font-semibold">
               Crie sua conta agora.
             </Link>
           </p>

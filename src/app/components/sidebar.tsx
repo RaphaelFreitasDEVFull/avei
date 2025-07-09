@@ -45,13 +45,19 @@ const Sidebar = () => {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex gap-4">
-          <Button variant="ghost" className="cursor-pointer">
-            Login
-          </Button>
-          <Button variant="secondary" className="cursor-pointer">
-            <Languages />
-          </Button>
-          <Button className="cursor-pointer">Encontre um lugar</Button>
+          <Link href="/login" className="text-gray-700 hover:text-blue-600">
+            <Button variant="ghost" className="cursor-pointer">
+              Login
+            </Button>
+          </Link>
+          <Link href="#" className="text-gray-700 hover:text-blue-600">
+            <Button variant="secondary" className="cursor-pointer">
+              <Languages />
+            </Button>
+          </Link>
+          <Link href="#" className="text-gray-700 hover:text-blue-600">
+            <Button className="cursor-pointer">Encontre um lugar</Button>
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
